@@ -1,0 +1,42 @@
+name: edge_ai_test
+description: App modèle flutter_edge_ai — RAG on-device
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: '>=3.44.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Core flutter_edge_ai
+  flutter_edge_ai: ^2.5.2
+
+  # Engine LiteRT-LM — Qwen 2.5 + EmbeddingGemma 2
+  flutter_edge_ai_litertlm: ^1.17.0
+
+  # RAG
+  flutter_edge_ai_rag: ^1.1.2
+  flutter_edge_ai_sqlite: ^2.1.1
+
+  # Package interne local
+  local_ai_kit:
+    path: ../../plugins/local_ai_kit
+
+  # Utilitaires
+  file_picker: ^13.3.0
+  path: ^1.8.0
+  path_provider: ^2.1.6
+  flutter_riverpod: ^2.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

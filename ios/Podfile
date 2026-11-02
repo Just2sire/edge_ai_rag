@@ -1,0 +1,27 @@
+platform :ios, '15.0'
+use_frameworks! :linkage => :static
+
+# Pour les gros modèles (>500 MB), les entitlements sont dans Runner.entitlements et Release.entitlements
+
+target 'Runner' do
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+  end
+
+  # Configurer les entitlements pour les gros modèles
+  project = installer.pods_project
+  target = project.targets.find { |t| t.name == 'Runner' }
+  if target
+    ['Debug', 'Release', 'Profile'].each do |config_name|
+      config = target.build_configurations.find { |c| c.name == config_name }
+      if config
+        entitlements_file = config_name == 'Release' ? 'Runner/Release.entitlements' : 'Runner/Runner.entitlements'
+        config.build_settings['CODE_SIGN_ENTITLEMENTS'] = entitlements_file
+      end
+    end
+  end
+end
